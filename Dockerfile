@@ -1,6 +1,6 @@
 FROM ruby:2.6-alpine
 
-ENV RUNTIME_PACKAGES="linux-headers libxml2-dev libxslt-dev make gcc libc-dev nodejs npm git tzdata postgresql-dev postgresql" \
+ENV RUNTIME_PACKAGES="linux-headers libxml2-dev libxslt-dev make gcc libc-dev nodejs tzdata postgresql-dev postgresql" \
     DEV_PACKAGES="build-base curl-dev" \
     HOME="/app"
 
@@ -14,7 +14,8 @@ RUN apk update && \
 
 RUN apk add --update --no-cache $RUNTIME_PACKAGES && \
     apk add --update --virtual build-dependencies --no-cache $DEV_PACKAGES && \
-    bundle install -j4 && \
     apk del build-dependencies
+
+RUN bundle install -j4
 
 ADD . $HOME

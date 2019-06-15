@@ -1,6 +1,7 @@
 {
   "name": "kazu_com",
   "dependencies": {
+    "axios": "^0.19.0",
     "vue": "^2.6.10"
   },
   "devDependencies": {

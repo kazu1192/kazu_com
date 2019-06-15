@@ -8,7 +8,7 @@ export default {
     return {
       message: "Hello Vue! @home.vue"
     }
-  }
+  },
 }
 </script>
 
