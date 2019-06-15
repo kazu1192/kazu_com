@@ -1,10 +1,13 @@
 <template>
-  <h1>{{ message }}</h1>
+  <div class="top">
+    <h1>{{ message }}</h1>
+  </div>
 </template>
 
 <script>
 export default {
-  data: function () {
+  name: 'Top',
+  data () {
     return {
       message: "Hello Vue! @home.vue"
     }

@@ -3,12 +3,10 @@ const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
   mode: 'development',
-  entry: {
-    index: './src/index.js'
-  },
+  entry: './src/main.js',
   output: {
-    filename: '[name].js',
-    path: path.join(__dirname, '/dist')
+    filename: 'bundle.js',
+    path: path.join(__dirname, './dist')
   },
   module: {
     rules: [
@@ -25,6 +23,10 @@ module.exports = {
       {
         test: /\.vue$/, 
         loader: 'vue-loader'
+      },
+      {
+        test: /\.pug$/,
+        loader: 'pug-plain-loader'
       },
       {
         test: /\.(scss|css)/,
@@ -57,5 +59,10 @@ module.exports = {
     },
     extensions: ['*', '.js', '.vue', '.json']
   },
-  plugins: [new VueLoaderPlugin()],
+  plugins: [
+    new VueLoaderPlugin(),
+  ],
+  devServer: {
+    contentBase: path.join(__dirname, './dist')
+  }
 }
