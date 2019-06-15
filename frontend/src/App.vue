@@ -1,13 +1,19 @@
 <template lang="pug">
   #app
-    h1 This is a Pug example
-    #container
-      p Hello world!
+    h1 {{ header }}
+    h2 This is a App.vue
+    router-view
+    h1 {{ footer }}
 </template>
 
 <script>
 export default {
-  name: 'App'
+  data () {
+    return {
+      header: "* Header *",
+      footer: "* Footer *"
+    }
+  }
 }
 </script>
 

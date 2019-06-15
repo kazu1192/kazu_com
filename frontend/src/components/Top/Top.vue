@@ -1,19 +1,20 @@
-<template>
-  <div class="top">
-    <h1>{{ message }}</h1>
-  </div>
+<template lang="pug">
+  #top
+    h1 {{ message }}
 </template>
 
 <script>
 export default {
-  name: 'Top',
   data () {
     return {
-      message: "Hello Vue! @home.vue"
+      message: "Hello Vue! I am Top.vue"
     }
   },
 }
 </script>
 
 <style scoped>
+#top {
+  background-color: skyblue;
+}
 </style>
