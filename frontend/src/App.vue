@@ -1,15 +1,23 @@
 <template lang="pug">
-  #app
-    h1 This is a Pug example
-    #container
-      p Hello world!
+#app
+  globalheader
+  router-view
+  globalfooter
 </template>
 
 <script>
+import globalheader from './components/globals/header.vue'
+import globalfooter from './components/globals/footer.vue'
+
 export default {
-  name: 'App'
-}
+  name: 'app',
+  components: {
+    globalheader,
+    globalfooter,
+  }
+};
 </script>
 
-<style scoped>
+<style lang="scss">
+@import "scss/main.scss"
 </style>

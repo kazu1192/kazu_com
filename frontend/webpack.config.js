@@ -1,42 +1,54 @@
-const path = require('path')
-const { VueLoaderPlugin } = require('vue-loader')
+var path = require('path');
+var webpack = require('webpack');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   mode: 'development',
-  entry: './src/main.js',
+  entry: {
+    main: './src/main.js',
+  },
   output: {
-    filename: 'bundle.js',
-    path: path.join(__dirname, './dist')
+    filename: '[name].js',
+    path: path.resolve(__dirname, './dist')
   },
   module: {
     rules: [
+      //*javascript rules*
       {
-        test: /\.js$/, 
-        exclude: /node_modules/, 
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env']
-          }
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        options: {
+          presets: ['@babel/preset-env']
         }
       },
+      //*Vue.js rules*
       {
-        test: /\.vue$/, 
-        loader: 'vue-loader'
+        test: /\.vue$/,
+        loader: 'vue-loader',
       },
+      {
+        enforce: 'pre',
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'eslint-loader'
+      },
+      //*pug rules*
       {
         test: /\.pug$/,
         loader: 'pug-plain-loader'
       },
+      //*scss rules*
       {
-        test: /\.(scss|css)/,
+        test: /\.(css|scss)$/,
         use: [
-          'style-loader',
+          //'style-loader',
+          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
               url: false,
-              sourceMap: true,
               // 0 => no loaders (default);
               // 1 => postcss-loader;
               // 2 => postcss-loader, sass-loader
@@ -44,25 +56,56 @@ module.exports = {
             },
           },
           {
-            loader: 'sass-loader',
+            loader: 'postcss-loader',
             options: {
-              sourceMap: true,
+              plugins: () => [
+                require('autoprefixer')
+              ]
             }
-          }
-        ]
-      }
+          },
+          'sass-loader',
+        ],
+      },
     ]
   },
+  plugins: [
+    new VueLoaderPlugin(),
+    new MiniCssExtractPlugin({
+      filename: '[name].css'
+    }),
+  ],
   resolve: {
     alias: {
       'vue$': 'vue/dist/vue.esm.js'
     },
     extensions: ['*', '.js', '.vue', '.json']
   },
-  plugins: [
-    new VueLoaderPlugin(),
-  ],
   devServer: {
-    contentBase: path.join(__dirname, './dist')
-  }
-}
+    historyApiFallback: true,
+    noInfo: true,
+  },
+  performance: {
+    hints: false
+  },
+  devtool: '#eval-source-map'
+};
+if (process.env.NODE_ENV === 'production') {
+  module.exports.devtool = '#source-map'
+  // http://vue-loader.vuejs.org/en/workflow/production.html
+  module.exports.plugins = (module.exports.plugins || []).concat([
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: '"production"'
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
+      compress: {
+        warnings: false
+      }
+    }),
+    new webpack.LoaderOptionsPlugin({
+      minimize: true
+    })
+  ])
+};
