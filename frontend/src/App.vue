@@ -1,21 +1,18 @@
 <template lang="pug">
-  #app
-    h1 {{ header }}
-    h2 This is a App.vue
-    router-view
-    h1 {{ footer }}
+app
+  globalheader
+  router-view
+  globalfooter
 </template>
 
 <script>
+import globalheader from './components/globals/header.vue'
+import globalfooter from './components/globals/footer.vue'
+
 export default {
-  data () {
-    return {
-      header: "* Header *",
-      footer: "* Footer *"
-    }
+  components: {
+    globalheader,
+    globalfooter,
   }
 }
 </script>
-
-<style scoped>
-</style>
