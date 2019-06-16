@@ -1,18 +1,54 @@
-const { VueLoaderPlugin } = require('vue-loader')
-
-const MODE = 'development'
-const enabledSourceMap = MODE === 'development'
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
-  mode: MODE,
-  devtool: 'source-map',
+  mode: 'development',
   entry: `./src/main.js`,
   output: {
-    filename: 'bundle.js',
+    filename: 'index.js',
     path: (`${__dirname}/dist`)
   },
   module: {
     rules: [
+      //*scss rules*
+      {
+        test: /\.scss$/,
+        use: [
+          //'style-loader',
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              url: false,
+              sourceMap: true,
+              // 0 => no loaders (default);
+              // 1 => postcss-loader;
+              // 2 => postcss-loader, sass-loader
+              importLoaders: 2
+            },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: true,
+              plugins: () => [
+                require('autoprefixer')
+              ]
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+            }
+          },
+        ],
+      },
+      //*Vue.js rules*
+      {
+        test: /\.vue$/, 
+        loader: 'vue-loader',
+      },
       //*javascript rules*
       {
         test: /\.js$/, 
@@ -28,58 +64,34 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'eslint-loader'
       },
-      //*Vue.js rules*
-      {
-        test: /\.vue$/, 
-        loader: 'vue-loader'
-      },
       //*pug rules*
       {
         test: /\.pug$/,
         loader: 'pug-plain-loader'
       },
-      //*scss rules*
-      {
-        test: /\.scss/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              url: false,
-              sourceMap: enabledSourceMap,
-              // 0 => no loaders (default);
-              // 1 => postcss-loader;
-              // 2 => postcss-loader, sass-loader
-              importLoaders: 2
-            },
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              sourceMap: enabledSourceMap,
-              plugins: [
-                require('autoprefixer')({
-                  grid: true
-                })
-              ]
-            }
-          },
-          {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: enabledSourceMap,
-            }
-          }
-        ]
-      }
     ]
   },
   plugins: [
     new VueLoaderPlugin(),
+    new MiniCssExtractPlugin({ filename: 'index.css' }),
   ],
+  resolve: {
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js'
+    },
+    extensions: ['*', '.js', '.vue', '.json']
+  },
   devServer: {
-    contentBase: 'dist',
-    open: true
-  }
+    historyApiFallback: true,
+    noInfo: true,
+  },
+  resolve: {
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js'
+    }
+  },
+  performance: {
+    hints: false
+  },
+  devtool: 'source-map'
 }
