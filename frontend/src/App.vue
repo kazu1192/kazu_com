@@ -15,7 +15,7 @@ export default {
     globalheader,
     globalfooter,
   }
-}
+};
 </script>
 
 <style lang="scss">

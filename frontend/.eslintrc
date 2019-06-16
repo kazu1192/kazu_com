@@ -1,10 +1,18 @@
 {
+  "root": true,
   "extends": "eslint:recommended",
-  "parserOptions": {
-    "ecmaVersion": 6,
-    "sourceType": "module"
+  "rules": {
+    "indent": [2, 2],
+    "linebreak-style": [2, "unix"],
+    "semi": [2, "always"],
   },
   "env": {
-    "browser": true
+    "es6": true,
+    "node": true,
+    "browser": true,
+    "jquery": true,
+  },
+  "parserOptions": {
+    "sourceType": "module"
   }
 }

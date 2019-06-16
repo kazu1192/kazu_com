@@ -1,4 +1,6 @@
 <template lang="pug">
+div
+  hr
   footer
     .container
       .row

@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+    nav#mainNav.navbar.navbar-expand-lg.navbar-light.fixed-top
       .container
         router-link.navbar-brand(to="/") Start Bootstrap
         button.navbar-toggler.navbar-toggler-right(type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation")
@@ -13,9 +13,9 @@
             li.nav-item
               router-link.nav-link(to="/About") About
             li.nav-item
-              router-link.nav-link(to="post.html") Sample Post
+              router-link.nav-link(to="/Post") Sample Post
             li.nav-item
-              router-link.nav-link(to="contact.html") Contact
+              router-link.nav-link(to="/Contact") Contact
     header.masthead(style="background-color: skyblue")
       .overlay
       .container

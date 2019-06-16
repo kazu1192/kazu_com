@@ -48,5 +48,4 @@ div
         // Pager
         .clearfix
           a.btn.btn-primary.float-right(href="#") Older Posts →
-  hr
 </template>
