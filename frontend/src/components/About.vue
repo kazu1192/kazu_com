@@ -1,5 +1,14 @@
 <template lang="pug">
-#main
+div
+  // Page Header
+  header.masthead(style="background-image: url('img/about-bg.jpg')")
+    .overlay
+    .container
+      .row
+        .col-lg-8.col-md-10.mx-auto
+          .page-heading
+            h1 About Me
+            span.subheading This is what I do.
   .container
     .row
       .col-lg-8.col-md-10.mx-auto

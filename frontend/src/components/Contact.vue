@@ -1,51 +1,46 @@
 <template lang="pug">
 div
+  // Page Header
+  header.masthead(style="background-image: url('img/contact-bg.jpg')")
+    .overlay
+    .container
+      .row
+        .col-lg-8.col-md-10.mx-auto
+          .page-heading
+            h1 Contact Me
+            span.subheading Have questions? I have answers.
+  // Main Content
   .container
     .row
       .col-lg-8.col-md-10.mx-auto
-        .post-preview
-          router-link(to="post.html")
-            h2.post-title
-              | Man must explore, and this is exploration at its greatest
-            h3.post-subtitle
-              | Problems look mighty small from 150 miles up
-          p.post-meta
-            | Posted by
-            router-link(to="#") Start Bootstrap
-            |             on September 24, 2019
-        hr
-        .post-preview
-          router-link(to="post.html")
-            h2.post-title
-              | I believe every human has a finite number of heartbeats. I don't intend to waste any of mine.
-          p.post-meta
-            | Posted by
-            router-link(to="#") Start Bootstrap
-            |             on September 18, 2019
-        hr
-        .post-preview
-          router-link(to="post.html")
-            h2.post-title
-              | Science has not yet mastered prophecy
-            h3.post-subtitle
-              | We predict too much for the next year and yet far too little for the next ten.
-          p.post-meta
-            | Posted by
-            router-link(to="#") Start Bootstrap
-            |             on August 24, 2019
-        hr
-        .post-preview
-          router-link(to="post.html")
-            h2.post-title
-              | Failure is not an option
-            h3.post-subtitle
-              | Many say exploration is part of our destiny, but it’s actually our duty to future generations.
-          p.post-meta
-            | Posted by
-            router-link(to="#") Start Bootstrap
-            |             on July 8, 2019
-        hr
-        // Pager
-        .clearfix
-          a.btn.btn-primary.float-right(href="#") Older Posts →
+        p
+          | Want to get in touch? Fill out the form below to send me a message and I will get back to you as soon as possible!
+        // Contact Form - Enter your email address on line 19 of the mail/contact_me.php file to make this form work.
+        // WARNING: Some web hosts do not allow emails to be sent through forms to common mail hosts like Gmail or Yahoo. It's recommended that you use a private domain email address!
+        // To use the contact form, your site must be on a live web host with PHP! The form will not work locally!
+        form#contactForm(name="sentMessage" novalidate="")
+          .control-group
+            .form-group.floating-label-form-group.controls
+              label Name
+              input#name.form-control(type="text" placeholder="Name" required="" data-validation-required-message="Please enter your name.")
+              p.help-block.text-danger
+          .control-group
+            .form-group.floating-label-form-group.controls
+              label Email Address
+              input#email.form-control(type="email" placeholder="Email Address" required="" data-validation-required-message="Please enter your email address.")
+              p.help-block.text-danger
+          .control-group
+            .form-group.col-xs-12.floating-label-form-group.controls
+              label Phone Number
+              input#phone.form-control(type="tel" placeholder="Phone Number" required="" data-validation-required-message="Please enter your phone number.")
+              p.help-block.text-danger
+          .control-group
+            .form-group.floating-label-form-group.controls
+              label Message
+              textarea#message.form-control(rows="5" placeholder="Message" required="" data-validation-required-message="Please enter a message.")
+              p.help-block.text-danger
+          br
+          #success
+          .form-group
+            button#sendMessageButton.btn.btn-primary(type="submit") Send
 </template>

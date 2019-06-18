@@ -14,7 +14,6 @@ module.exports = {
   },
   module: {
     rules: [
-      //*javascript rules*
       {
         test: /\.js$/,
         exclude: /node_modules/,
@@ -23,23 +22,20 @@ module.exports = {
           presets: ['@babel/preset-env']
         }
       },
-      //*Vue.js rules*
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-      },
       {
         enforce: 'pre',
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'eslint-loader'
       },
-      //*pug rules*
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+      },
       {
         test: /\.pug$/,
         loader: 'pug-plain-loader'
       },
-      //*scss rules*
       {
         test: /\.(css|scss)$/,
         use: [
@@ -53,7 +49,7 @@ module.exports = {
               // 1 => postcss-loader;
               // 2 => postcss-loader, sass-loader
               importLoaders: 2
-            },
+            }
           },
           {
             loader: 'postcss-loader',
@@ -63,9 +59,11 @@ module.exports = {
               ]
             }
           },
-          'sass-loader',
-        ],
-      },
+          {
+            loader: 'sass-loader'
+          }
+        ]
+      }
     ]
   },
   plugins: [
@@ -87,8 +85,9 @@ module.exports = {
   performance: {
     hints: false
   },
-  devtool: '#eval-source-map'
+  devtool: '#eval-source-map',
 };
+
 if (process.env.NODE_ENV === 'production') {
   module.exports.devtool = '#source-map'
   // http://vue-loader.vuejs.org/en/workflow/production.html

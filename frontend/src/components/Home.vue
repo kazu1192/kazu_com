@@ -1,5 +1,13 @@
 <template lang="pug">
 div
+  header.masthead(style="background-color: skyblue")
+    .overlay
+    .container
+      .row
+        .col-lg-8.col-md-10.mx-auto
+          .site-heading
+            h1 Clean Blog
+            span.subheading A Blog Theme by Start Bootstrap
   .container
     .row
       .col-lg-8.col-md-10.mx-auto

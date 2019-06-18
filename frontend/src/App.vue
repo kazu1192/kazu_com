@@ -1,7 +1,8 @@
 <template lang="pug">
 #app
   globalheader
-  router-view
+  transition
+    router-view
   globalfooter
 </template>
 
