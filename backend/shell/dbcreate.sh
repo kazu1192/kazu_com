@@ -2,6 +2,6 @@
 
 echo '*create database*'
 
-docker-compose run rails rails db:create
-docker-compose run rails rails db:migrate
-docker-compose run rails rails db:seed
+docker-compose run web rails db:create
+docker-compose run web rails db:migrate
+docker-compose run web rails db:seed
