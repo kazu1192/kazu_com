@@ -1,7 +1,7 @@
 FROM ruby:2.6-alpine
 
-ENV RUNTIME_PACKAGES="linux-headers libxml2-dev libxslt-dev make gcc libc-dev nodejs tzdata" \
-    DEV_PACKAGES="build-base curl-dev" \
+ENV RUNTIME_PACKAGES="linux-headers libxml2-dev libxslt-dev bash make gcc libc-dev nodejs yarn tzdata mysql-client mysql-dev" \
+    DEV_PACKAGES="build-base curl curl-dev" \
     HOME="/app"
 
 WORKDIR $HOME
@@ -14,6 +14,8 @@ RUN apk update && \
     apk add --update --virtual build-dependencies --no-cache $DEV_PACKAGES && \
     apk del build-dependencies
 
-RUN bundle install -j4
+RUN gem install bundler && \
+    bundle install -j4
 
 COPY . $HOME
+CMD ["bundle", "exec", "rails", "s"]

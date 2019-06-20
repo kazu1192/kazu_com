@@ -38,7 +38,7 @@ version: '3'
 
 services:
   db:
-    image: mongo:4.1-bionic
+    image: postgres:latest
   web:
     build: .
     command: bundle exec rails s -p 3000 -b '0.0.0.0'
@@ -60,15 +60,14 @@ gem 'rails', '5.2.2'
 ### 実行
 
 ```
-$ docker-compose run web rails new . --api --skip-active-record --skip-test
+$ docker-compose run web rails new . --api --database=postgresql --skip-test
 $ sudo chown -R $USER:$USER .
 ```
 
-[Gemfile に gem 'mongoid', gem 'rspec-rails', gem 'faker' を追加](./backend/Gemfile)
+[Gemfile に gem 'rspec-rails', gem 'faker' を追加](./backend/Gemfile)
 
 ```
 $ docker-compose build
-$ docker-compose run web rails g mongoid:config
 $ docker-compose run web rails db:create
 $ docker-compose up -d
 $ sudo chown -R $USER:$USER .
