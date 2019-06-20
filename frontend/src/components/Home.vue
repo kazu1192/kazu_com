@@ -6,7 +6,7 @@ div
       .row
         .col-lg-8.col-md-10.mx-auto
           .site-heading
-            h1 Clean Blog
+            h1 Kazu Blog
             span.subheading A Blog Theme by Start Bootstrap
   .container
     .row
