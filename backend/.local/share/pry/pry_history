@@ -1,0 +1,7 @@
+Article.all
+less Article.all
+reload!
+show-models
+show-routes
+show-models
+Article.find(1)
