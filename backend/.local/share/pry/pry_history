@@ -5,3 +5,5 @@ show-models
 show-routes
 show-models
 Article.find(1)
+show-models
+show-routes
