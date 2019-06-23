@@ -1,50 +1,44 @@
 class Api::V1::ArticlesController < ApplicationController
+  before_action :set_article, only: [:update, :destroy]
+
+  # GET /articles
+  # GET /articles.json
   def index
-    articles = Article.order(created_at: :desc)
-    render json: {
-      status: 'SUCCESS', message: 'loaded articles', data: articles
-    }
+    @articles = Article.all
+    render json: @articles
   end
 
+  # GET /articles/1
+  # GET /articles/1.json
   def show
-    article = Article.find(params[:id])
-    render json: {
-      status: 'SUCCESS', message: 'loaded the article', data: article
-    }
   end
 
+  # GET /articles
+  # GET /articles.json
   def create
-    article = Article.new(article_params)
-    if article.save
-      render json: {
-        status: 'SUCCESS', message: 'loaded the article', data: article
-      }
+    @article = Article.new(article_params)
+
+    if @article.save
+      render :show, status: :created, location: @user
     else
-      render json: {
-        status: 'ERROR', message: 'article not saved', data: article.errors
-      }
+      render json: @user.errors, status: :unprocessable_entry
     end
   end
 
-  def destroy
-    article = Article.find(params[:id])
-    article.destroy
-    render json: {
-      status: 'SUCCESS', message: 'deleted the article', data: article
-    }
-  end
-
+  # PUT /articles/1
+  # PUT /articles/1.json
   def update
-    article = Article.find(params[:id])
-    if article.update(article_params)
-      render json: {
-        status: 'SUCCESS', message: 'updated the article', data: article
-      }
+    if @article.update(article_params)
+      render :show, status: :ok, location: @user
     else
-      render json: {
-        status: 'SUCCESS', message: 'loaded the article', data: article
-      }
+      render json: @user.errors, status: :unprocessable_entry
     end
+  end
+
+  # DELETE /articles/1
+  # DELETE /articles/1.json
+  def destroy
+    @articles.destroy
   end
 
   private
