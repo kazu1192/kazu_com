@@ -7,3 +7,8 @@ show-models
 Article.find(1)
 show-models
 show-routes
+routes
+show-routes
+exit
+show-routes
+exit
