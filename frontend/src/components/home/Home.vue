@@ -1,59 +1,49 @@
 <template lang="pug">
-div
-  header.masthead(style="background-color: skyblue")
-    .overlay
+  div
+    header.masthead(style="background-color: skyblue")
+      .overlay
+      .container
+        .row
+          .col-lg-8.col-md-10.mx-auto
+            .site-heading
+              h1 Kazu Blog
+              span.subheading A Blog Theme by Start Bootstrap
     .container
       .row
         .col-lg-8.col-md-10.mx-auto
-          .site-heading
-            h1 Kazu Blog
-            span.subheading A Blog Theme by Start Bootstrap
-  .container
-    .row
-      .col-lg-8.col-md-10.mx-auto
-        .post-preview
-          router-link(to="Post")
-            h2.post-title
-              | Man must explore, and this is exploration at its greatest
-            h3.post-subtitle
-              | Problems look mighty small from 150 miles up
-          p.post-meta
-            | Posted by
-            router-link(to="#") Start Bootstrap
-            |             on September 24, 2019
-        hr
-        .post-preview
-          router-link(to="Post")
-            h2.post-title
-              | I believe every human has a finite number of heartbeats. I don't intend to waste any of mine.
-          p.post-meta
-            | Posted by
-            router-link(to="#") Start Bootstrap
-            |             on September 18, 2019
-        hr
-        .post-preview
-          router-link(to="Post")
-            h2.post-title
-              | Science has not yet mastered prophecy
-            h3.post-subtitle
-              | We predict too much for the next year and yet far too little for the next ten.
-          p.post-meta
-            | Posted by
-            router-link(to="#") Start Bootstrap
-            |             on August 24, 2019
-        hr
-        .post-preview
-          router-link(to="Post")
-            h2.post-title
-              | Failure is not an option
-            h3.post-subtitle
-              | Many say exploration is part of our destiny, but it’s actually our duty to future generations.
-          p.post-meta
-            | Posted by
-            router-link(to="#") Start Bootstrap
-            |             on July 8, 2019
-        hr
-        // Pager
-        .clearfix
-          a.btn.btn-primary.float-right(href="#") Older Posts →
+          ul.list-body(v-for="(article, index) in articles" v-bind:key="article.id")
+            .post-preview
+              router-link(to="Post")
+                h2.post-title {{ article.title }}
+              p.post-meta
+                | Posted by
+                router-link(to="#") {{ article.name }}
+                |             on {{ article.updated_at }}
+            hr
+          // Pager
+          .clearfix
+            a.btn.btn-primary.float-right(href="#") Older Posts →
+    #search-articles
+      div
+        p(v-text="articles") ここにIPが表示されます
+        div
+          input(@click="getArticle" type="button" value="JSONを取得")
 </template>
+
+<script>
+  export default {
+    data: function () {
+      return {
+        articles: '',
+      }
+    },
+    methods: {
+      getArticle () {
+        this.$axios.get('http://localhost:3000/api/v1/articles.json')
+          .then((response) => {
+            this.articles = response.data;
+          });
+      }
+    }
+  };
+</script>

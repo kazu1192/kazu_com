@@ -18,4 +18,3 @@ RUN gem install bundler && \
     bundle install -j4
 
 COPY . $HOME
-CMD ["bundle", "exec", "rails", "s"]
