@@ -1,5 +1,5 @@
 <template lang="pug">
-  div
+  section
     header.masthead(style="background-color: skyblue")
       .overlay
       .container
@@ -15,6 +15,7 @@
             .post-preview
               router-link(to="Post")
                 h2.post-title {{ article.title }}
+              p {{ article.context }}
               p.post-meta
                 | Posted by
                 router-link(to="#") {{ article.name }}
@@ -23,27 +24,21 @@
           // Pager
           .clearfix
             a.btn.btn-primary.float-right(href="#") Older Posts →
-    #search-articles
-      div
-        p(v-text="articles") ここにIPが表示されます
-        div
-          input(@click="getArticle" type="button" value="JSONを取得")
 </template>
 
 <script>
-  export default {
-    data: function () {
-      return {
-        articles: '',
-      }
-    },
-    methods: {
-      getArticle () {
-        this.$axios.get('http://localhost:3000/api/v1/articles.json')
-          .then((response) => {
-            this.articles = response.data;
-          });
-      }
-    }
-  };
+import Axios from 'axios'
+
+export default {
+  name: 'Articles',
+  data () {
+    return { articles: [] }
+  },
+  created () {
+    Axios.get('http://localhost:3000/api/v1/articles?page=1')
+    .then((response) => {
+      this.articles = response.data
+    })
+  }
+}
 </script>
