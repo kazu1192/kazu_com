@@ -1,18 +1,39 @@
 <template lang="pug">
-nav#mainNav.navbar.navbar-expand-lg.navbar-light.fixed-top
-  .container
-    router-link.navbar-brand(to="/") Start Bootstrap
-    button.navbar-toggler.navbar-toggler-right(type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation")
-      | Menu
-      i.fas.fa-bars
-    #navbarResponsive.collapse.navbar-collapse
-      ul.navbar-nav.ml-auto
-        li.nav-item.active
+div#mainNav
+  b-navbar(toggleable="lg" type="dark" variant="dark")
+    .container
+      b-navbar-brand(to="/") NavBar
+      b-navbar-toggle(target="nav-collapse")
+      b-collapse#nav-collapse(is-nav="")
+        b-navbar-nav.ml-auto
           router-link.nav-link(to="/") Home
-        li.nav-item
           router-link.nav-link(to="/About") About
-        li.nav-item
-          router-link.nav-link(to="/Post") Sample Post
-        li.nav-item
           router-link.nav-link(to="/Contact") Contact
 </template>
+
+<script>
+export default {
+
+}
+</script>
+
+<style lang="scss" scoped>
+#mainNav {
+  font-family: sans-serif;
+  .navbar-brand {
+    font-weight: 800;
+  }
+  .navbar-toggler {
+    font-size: 12px;
+    font-weight: 800;
+    padding: 13px;
+    text-transform: uppercase;
+  }
+  .navbar-nav {
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+}
+</style>

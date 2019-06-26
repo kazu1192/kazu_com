@@ -5,7 +5,7 @@
   "author": "",
   "private": true,
   "scripts": {
-    "start": "webpack-dev-server --hot --inline",
+    "start": "webpack-dev-server",
     "build:dev": "cross-env NODE_ENV=development webpack --progress",
     "build:pro": "cross-env NODE_ENV=production webpack --progress"
   },
