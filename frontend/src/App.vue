@@ -1,11 +1,18 @@
 <template lang="pug">
-router-view#app
+main.blog
+  blog-nav
+  router-view#app
 </template>
 
 <script>
+import BlogNav from './components/BlogNav'
+import BlogFeed from './components/BlogFeed'
+
 export default {
   name: 'app',
-};
+  components: { BlogNav, BlogFeed, },
+  resource: 'Blog',
+}
 </script>
 
 <style lang="scss">

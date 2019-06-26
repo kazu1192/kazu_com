@@ -6,13 +6,15 @@ class Api::V1::ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def index
-    @articles = Article.page(params[:page]).per(PER)
+    @articles = Article.select('id, title, tag, created_at').page(params[:page]).per(PER)
     render json: @articles
   end
 
   # GET /articles/1
   # GET /articles/1.json
   def show
+    @article = Article.find(params[:id])
+    render json: @article
   end
 
   # GET /articles
@@ -21,9 +23,9 @@ class Api::V1::ArticlesController < ApplicationController
     @article = Article.new(article_params)
 
     if @article.save
-      render :show, status: :created, location: @user
+      render :show, status: :created, location: @article
     else
-      render json: @user.errors, status: :unprocessable_entry
+      render json: @article.errors, status: :unprocessable_entry
     end
   end
 
@@ -31,9 +33,9 @@ class Api::V1::ArticlesController < ApplicationController
   # PUT /articles/1.json
   def update
     if @article.update(article_params)
-      render :show, status: :ok, location: @user
+      render :show, status: :ok, location: @article
     else
-      render json: @user.errors, status: :unprocessable_entry
+      render json: @article.errors, status: :unprocessable_entry
     end
   end
 

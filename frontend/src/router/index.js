@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Blog from '../components';
+import BlogFeed from '../components/BlogFeed';
+import BlogPost from '../components/BlogPost';
 
 Vue.use(Router);
 
@@ -11,13 +12,13 @@ export default new Router({
     {
       path: '/',
       name: 'feed',
-      component: Blog
+      component: BlogFeed
     },
     {
-      path: '/read/:post',
+      path: '/post/:post',
       name: 'post',
       props: true,
-      component: Blog
+      component: BlogPost
     }
   ]
 });

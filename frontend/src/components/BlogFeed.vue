@@ -5,10 +5,9 @@
         .col-lg-8.col-md-10.mx-auto
           ul.list-body(v-for="(article, index) in articles" v-bind:key="article.id")
             .post-preview
-              router-link(to="`/read/${post.id}`")
+              router-link(:to="{ name: 'post', params: { post: article.id }}")
                 h2.post-title {{ article.title }}
-              p {{ article.context }}
-              p.post-meta {{ article.tag }} {{ article.updated_at | moment }}
+              p.post-meta {{ article.tag }} {{ article.created_at | moment }}
             hr
     infinite-loading(@infinite="infiniteHandler")
 </template>
