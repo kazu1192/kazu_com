@@ -1,10 +1,12 @@
 class Api::V1::ArticlesController < ApplicationController
   before_action :set_article, only: [:update, :destroy]
 
+  PER = 8
+
   # GET /articles
   # GET /articles.json
   def index
-    @articles = Article.all
+    @articles = Article.page(params[:page]).per(PER)
     render json: @articles
   end
 
