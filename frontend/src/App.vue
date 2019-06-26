@@ -1,8 +1,7 @@
 <template lang="pug">
   #app
     globalheader
-    transition
-      router-view
+    router-view
     globalfooter
 </template>
 
@@ -20,5 +19,7 @@
 </script>
 
 <style lang="scss">
-  @import "scss/main.scss"
+  @import "~bootstrap/scss/bootstrap";
+  @import "~bootstrap-vue/src/index.scss";
+  @import "scss/main.scss";
 </style>

@@ -16,29 +16,44 @@
               router-link(to="Post")
                 h2.post-title {{ article.title }}
               p {{ article.context }}
-              p.post-meta
-                | Posted by
-                router-link(to="#") {{ article.name }}
-                |             on {{ article.updated_at }}
+              p.post-meta Posted by
+                router-link(to="#") {{ article.name }} on {{ article.updated_at }}
             hr
-          // Pager
-          .clearfix
-            a.btn.btn-primary.float-right(href="#") Older Posts →
+    infinite-loading(@infinite="infiniteHandler")
 </template>
 
 <script>
-import Axios from 'axios'
+import Axios from 'axios';
+import InfiniteLoading from 'vue-infinite-loading';
+
+const api = '//localhost:3000/api/v1/articles';
 
 export default {
-  name: 'Articles',
-  data () {
-    return { articles: [] }
+  data() {
+    return {
+      page: 1,
+      articles: [],
+    };
   },
-  created () {
-    Axios.get('http://localhost:3000/api/v1/articles?page=1')
-    .then((response) => {
-      this.articles = response.data
-    })
+  components: {
+    InfiniteLoading,
+  },
+  methods: {
+    infiniteHandler($state) {
+      Axios.get(api, {
+        params: {
+          page: this.page,
+        },
+      }).then(({ data }) => {
+        if (data.length) {
+          this.page += 1;
+          this.articles.push(...data);
+          $state.loaded();
+        } else {
+          $state.complete();
+        }
+      });
+    }
   }
-}
+};
 </script>

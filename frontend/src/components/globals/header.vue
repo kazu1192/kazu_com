@@ -7,7 +7,7 @@ nav#mainNav.navbar.navbar-expand-lg.navbar-light.fixed-top
       i.fas.fa-bars
     #navbarResponsive.collapse.navbar-collapse
       ul.navbar-nav.ml-auto
-        li.nav-item
+        li.nav-item.active
           router-link.nav-link(to="/") Home
         li.nav-item
           router-link.nav-link(to="/About") About
