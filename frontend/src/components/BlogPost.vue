@@ -13,7 +13,7 @@
 import Axios from 'axios';
 import Moment from 'moment';
 
-const api = `//localhost:3000/api/v1/articles/`;
+const api = '//localhost:3000/api/v1/articles/';
 
 export default {
   data() {
@@ -22,9 +22,8 @@ export default {
     };
   },
   created() {
-    Axios.get(api).then((res) => {
-      this.article = res.data
-    })
+    Axios.get(api + `${this.$route.params.post}`)
+      .then(res => this.article = res.data)
   },
   filters: {
     moment: function(date) {

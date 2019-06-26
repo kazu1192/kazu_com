@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 2019_06_20_124359) do
   create_table "articles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.string "name"
-    t.string "context"
+    t.text "context"
     t.string "tag"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

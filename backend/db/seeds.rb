@@ -5,10 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-100.times do |n|
+100.times do
   title = Faker::Book.title
   name = Faker::JapaneseMedia::SwordArtOnline.game_name
-  context = Faker::Lorem.paragraph
+  context = Faker::Lorem.paragraph * 100
   tag = Faker::Book.genre
   Article.create(title: title, name: name, context: context, tag: tag)
 end
