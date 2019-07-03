@@ -1,12 +1,11 @@
 <template lang="pug">
-  article
+  section
     .container
       .row
         .col-lg-8.col-md-10.mx-auto
           h2.post-title {{ article.title }}
           p.post-context {{ article.context }}
           p.post-meta {{ article.tag }} {{ article.created_at | moment }}
-          p {{ $route.params.post }}
 </template>
 
 <script>
@@ -32,3 +31,10 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+ .post-title {
+  margin: 20px;
+}
+</style>
+

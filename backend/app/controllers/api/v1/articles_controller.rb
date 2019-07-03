@@ -1,5 +1,5 @@
 class Api::V1::ArticlesController < ApplicationController
-  before_action :set_article, only: [:update, :destroy]
+  before_action :set_article, only: [:show, :update, :destroy]
 
   PER = 8
 
@@ -13,7 +13,6 @@ class Api::V1::ArticlesController < ApplicationController
   # GET /articles/1
   # GET /articles/1.json
   def show
-    @article = Article.find(params[:id])
     render json: @article
   end
 
@@ -23,7 +22,7 @@ class Api::V1::ArticlesController < ApplicationController
     @article = Article.new(article_params)
 
     if @article.save
-      render :show, status: :created, location: @article
+      render json: @article, status: :created, location: @user
     else
       render json: @article.errors, status: :unprocessable_entry
     end
@@ -33,7 +32,7 @@ class Api::V1::ArticlesController < ApplicationController
   # PUT /articles/1.json
   def update
     if @article.update(article_params)
-      render :show, status: :ok, location: @article
+      render json: @article
     else
       render json: @article.errors, status: :unprocessable_entry
     end
@@ -47,7 +46,11 @@ class Api::V1::ArticlesController < ApplicationController
 
   private
 
+  def set_article
+    @article = Article.find(params[:id])
+  end
+
   def article_params
-    params.require(:article).permit(:title)
+    params.fetch(:article, {})
   end
 end

@@ -2,15 +2,17 @@
 main.blog
   blog-nav
   router-view#app
+  blog-footer
 </template>
 
 <script>
 import BlogNav from './components/BlogNav'
 import BlogFeed from './components/BlogFeed'
+import BlogFooter from './components/BlogFooter'
 
 export default {
   name: 'app',
-  components: { BlogNav, BlogFeed, },
+  components: { BlogNav, BlogFeed, BlogFooter },
   resource: 'Blog',
 }
 </script>

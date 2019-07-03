@@ -1,35 +1,38 @@
 require 'rails_helper'
 
-describe 'GET #index' do
-  before do
-    FactoryBot.create_list(:article, 10)
+RSpec.describe 'Articles', type: :request do
+  describe 'GET /articles' do
+    before do
+      @articles = FactoryBot.create_list(:article, 2)
+    end
+
+    it 'リクエストが成功したか確認する' do
+      get '/api/v1/articles'
+      expect(response.status).to eq(200)
+    end
+
+    it '正しい取得データ数か確認する' do
+      get '/api/v1/articles'
+      json = JSON.parse(response.body)
+      expect(json.size).to eq @articles.count
+      expect(json[0]['id']).to eq @articles[0].id
+      expect(json[1]['id']).to eq @articles[1].id
+    end
   end
 
-  it 'リクエストが成功したか確認する' do
-    get '/api/v1/articles'
-    expect(response.status).to eq(200)
-  end
+  describe 'POST /articles' do
+    before do
+      @params = FactoryBot.attributes_for(:article)
+    end
 
-  it '正しい取得データ数か確認する' do
-    get '/api/v1/articles'
-    json = JSON.parse(response.body)
-    expect(json['data'].length).to eq(10)
-  end
-end
+    it 'リクエストが成功したか確認する' do
+      post '/api/v1/articles', @params
+      expect(response).to be_success
+      expect(response.status).to eq(201)
+    end
 
-describe 'GET #show' do
-  before do
-    FactoryBot.create(:article, id: 1, title: 'test-title')
-  end
-
-  it 'リクエストが成功したか確認する' do
-    get '/api/v1/articles/1'
-    expect(response.status).to eq(200)
-  end
-
-  it '指定したidのArticleが取得出来たことを確認する' do
-    get '/api/v1/articles/1'
-    json = JSON.parse(response.body)
-    expect(json['data']['title']).to eq('test-title')
+    it '新しいArticleを作成する' do
+      expect { post '/api/v1/articles', @params }.to change(Article, :count).by(1)
+    end
   end
 end

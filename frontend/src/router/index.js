@@ -2,11 +2,11 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import BlogFeed from '../components/BlogFeed';
 import BlogPost from '../components/BlogPost';
+import NotFound from '../components/NotFound';
 
 Vue.use(Router);
 
 export default new Router({
-  mode: 'history',
   linkActiveClass: 'active',
   routes: [
     {
@@ -17,8 +17,11 @@ export default new Router({
     {
       path: '/post/:post',
       name: 'post',
-      props: true,
       component: BlogPost
+    },
+    {
+      path: '*',
+      component: NotFound
     }
   ]
 });
