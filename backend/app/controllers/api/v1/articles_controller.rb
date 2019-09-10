@@ -4,20 +4,17 @@ class Api::V1::ArticlesController < ApplicationController
   PER = 8
 
   # GET /articles
-  # GET /articles.json
   def index
     @articles = Article.select('id, title, tag, created_at').page(params[:page]).per(PER)
     render json: @articles
   end
 
   # GET /articles/1
-  # GET /articles/1.json
   def show
     render json: @article
   end
 
   # GET /articles
-  # GET /articles.json
   def create
     @article = Article.new(article_params)
 
@@ -29,7 +26,6 @@ class Api::V1::ArticlesController < ApplicationController
   end
 
   # PUT /articles/1
-  # PUT /articles/1.json
   def update
     if @article.update(article_params)
       render json: @article
@@ -39,7 +35,6 @@ class Api::V1::ArticlesController < ApplicationController
   end
 
   # DELETE /articles/1
-  # DELETE /articles/1.json
   def destroy
     @articles.destroy
   end
