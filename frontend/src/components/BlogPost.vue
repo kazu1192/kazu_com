@@ -12,7 +12,7 @@
 import Axios from 'axios';
 import Moment from 'moment';
 
-const api = '//localhost:3000/api/v1/articles/';
+const api = '//192.168.100.23:3000/api/v1/articles/';
 
 export default {
   data() {

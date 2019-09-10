@@ -14,6 +14,6 @@ RUN apk update && \
     curl -o- -L https://yarnpkg.com/install.sh | sh && \
     apk del build-dependencies
 
-RUN yarn install
+RUN yarn
 
 COPY . $HOME

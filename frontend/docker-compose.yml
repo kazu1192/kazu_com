@@ -9,4 +9,4 @@ services:
       - "8080:8080"
     tty: true
     stdin_open: true
-    command: /bin/bash
+    command: /bin/sh
