@@ -1,0 +1,42 @@
+version: '3'
+
+services:
+  rails_api:
+    build: ./backend
+    environment:
+      - DB_HOST_NAME=mysql
+    volumes:
+      - ./backend:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mysql
+    tty: true
+    stdin_open: true
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test_database
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker
+      TZ: 'Asia/Tokyo'
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+    - ./db/data:/var/lib/mysql
+    - ./db/my.cnf:/etc/mysql/conf.d/my.cnf
+    - ./db/sql:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
+  vuejs:
+    build: ./frontend
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "8080:80"
+    depends_on:
+      - rails_api
+volumes:
+  bundle:
+    driver: local
