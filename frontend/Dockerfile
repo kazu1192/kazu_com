@@ -1,13 +1,25 @@
-# ビルド環境
-FROM node:lts-alpine as build-stage
-WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . .
-RUN npm run build:dev
+FROM node:lts-alpine
 
-# 本番環境
-FROM nginx:stable-alpine as production-stage
-COPY --from=build-stage /app/dist /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+RUN apk update && \
+  apk add git && \
+  apk add --no-cache curl && \
+  curl -o- -L https://yarnpkg.com/install.sh | sh
+
+# カレントワーキングディレクトリとして 'app' フォルダを指定する
+WORKDIR /app
+
+# `package.json` と `package-lock.json` （あれば）を両方コピーする
+COPY package.json ./
+COPY yarn.lock ./
+
+# プロジェクトの依存ライブラリをインストールする
+RUN yarn install
+
+# カレントワーキングディレクトリ(つまり 'app' フォルダ)にプロジェクトのファイルやフォルダをコピーする
+COPY . .
+
+# 本番向けに圧縮しながらアプリケーションをビルドする
+RUN yarn run build:dev
+
+EXPOSE 8080
+CMD [ "yarn", "start" ]

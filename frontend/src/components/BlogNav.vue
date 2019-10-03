@@ -1,7 +1,10 @@
-<template lang="pug">
-  div#mainNav
-    b-navbar(toggleable="lg" type="dark" variant="dark")
-      b-navbar-brand(to="/") Kazu Blog
+<template>
+  <div id="mainNav">
+    <v-toolbar app fixed clipped-left>
+      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+      <v-toolbar-title>Application</v-toolbar-title>
+    </v-toolbar>
+  </div>
 </template>
 
 <style lang="scss" scoped>

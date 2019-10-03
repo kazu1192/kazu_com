@@ -1,24 +1,25 @@
-<template lang="pug">
-main.blog
-  blog-nav
-  router-view#app
-  blog-footer
+<template>
+  <v-app dark>
+    <div id="main.blog">
+      <blog-nav></blog-nav>
+      <router-view id="app"></router-view>
+      <blog-footer></blog-footer>
+    </div>
+  </v-app>
 </template>
 
 <script>
-import BlogNav from './components/BlogNav'
-import BlogFeed from './components/BlogFeed'
-import BlogFooter from './components/BlogFooter'
+  import BlogNav from './components/BlogNav'
+  import BlogFeed from './components/BlogFeed'
+  import BlogFooter from './components/BlogFooter'
 
-export default {
-  name: 'app',
-  components: { BlogNav, BlogFeed, BlogFooter },
-  resource: 'Blog',
-}
+  export default {
+    name: 'app',
+    components: { BlogNav, BlogFeed, BlogFooter },
+    resource: 'Blog',
+  }
 </script>
 
 <style lang="scss">
-@import "~bootstrap/scss/bootstrap";
-@import "~bootstrap-vue/src/index.scss";
-@import "scss/main.scss";
+  @import "scss/main.scss";
 </style>

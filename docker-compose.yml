@@ -34,7 +34,7 @@ services:
     volumes:
       - ./frontend:/app
     ports:
-      - "8080:80"
+      - "8080:8080"
     depends_on:
       - rails_api
 volumes:
