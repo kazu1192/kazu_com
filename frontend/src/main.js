@@ -1,9 +1,7 @@
 import Vue from 'vue';
-import BoostrapVue from 'bootstrap-vue';
 import App from './App';
 import router from './router';
-
-Vue.use(BoostrapVue);
+import vuetify from './plugins/vuetify';
 
 new Vue({
   router,
