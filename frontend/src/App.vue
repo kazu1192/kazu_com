@@ -1,6 +1,6 @@
 <template>
   <v-app dark>
-    <div id="main.blog">
+    <div id="main">
       <blog-nav></blog-nav>
       <router-view id="app"></router-view>
       <blog-footer></blog-footer>
@@ -19,7 +19,3 @@
     resource: 'Blog',
   }
 </script>
-
-<style lang="scss">
-  @import "scss/main.scss";
-</style>
