@@ -15,7 +15,7 @@ export default new Router({
       component: BlogFeed
     },
     {
-      path: '/post/:post',
+      path: '/post/:id',
       name: 'post',
       component: BlogPost
     },

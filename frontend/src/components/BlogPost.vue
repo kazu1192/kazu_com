@@ -1,28 +1,29 @@
-<template lang="pug">
-  section
-    .container
-      .row
-        .col-lg-8.col-md-10.mx-auto
-          h2.post-title {{ article.title }}
-          p.post-context {{ article.context }}
-          p.post-meta {{ article.tag }} {{ article.created_at | moment }}
+<template>
+  <section>
+    <div class="container">
+      <h2 class="post-title">{{ article.title }}</h2>
+      <p class="post-context">{{ article.context }}</p>
+      <p class="post-meta">{{ article.tag }} {{ article.created_at | moment }}</p>
+    </div>
+  </section>
 </template>
 
 <script>
-import Axios from 'axios';
-import Moment from 'moment';
+import Axios from "axios";
+import Moment from "moment";
 
-const api = '//192.168.100.23:3000/api/v1/articles/';
+const api = "//192.168.100.23:3000/api/v1/articles/";
 
 export default {
   data() {
     return {
-      article: '',
+      article: ""
     };
   },
   created() {
-    Axios.get(api + `${this.$route.params.post}`)
-      .then(res => this.article = res.data)
+    Axios.get(api + `${this.$route.params.id}`).then(
+      res => (this.article = res.data)
+    );
   },
   filters: {
     moment: function(date) {
@@ -31,9 +32,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
- .post-title {
-  margin: 20px;
-}
-</style>

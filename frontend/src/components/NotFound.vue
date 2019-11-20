@@ -1,4 +1,3 @@
-<template lang="pug">
-  div
-    h1 404 Not Found.
+<template>
+  <h1>404 Not Found.</h1>
 </template>

@@ -1,5 +1,4 @@
 var path = require('path');
-var webpack = require('webpack');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
@@ -32,37 +31,18 @@ module.exports = {
         loader: 'vue-loader',
       },
       {
-        test: /\.pug$/,
-        loader: 'pug-plain-loader'
-      },
-      {
         test: /\.(css|scss|sass)$/,
         use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              url: false,
-              sourceMap: true,
-              // 0 => no loaders (default);
-              // 1 => postcss-loader;
-              // 2 => postcss-loader, sass-loader
-              importLoaders: 2
-            }
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              plugins: () => [
-                require('autoprefixer')
-              ]
-            }
-          },
+          'vue-style-loader',
+          'css-loader',
           {
             loader: 'sass-loader',
             options: {
-              // ソースマップの利用有無
-              sourceMap: true
+              implementation: require('sass'),
+              sassOptions: {
+                fiber: require('fibers'),
+                indentedSyntax: true
+              }
             }
           }
         ]

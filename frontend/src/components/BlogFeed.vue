@@ -2,15 +2,13 @@
   <section>
     <div class="container">
       <div class="row">
-        <div class="ul list-body">
-          <v-for="(article, index) in articles"><v-bind:key="article.id"/>
+        <div class="ul list-body" v-for="article in articles" v-bind:key="article.id">
           <div class="post-preview">
-            <router-link :to="{ name: 'post', params: {[ post: article.id }}">
+            <router-link v-bind:to="{ name : 'post', params : { id: article.id }}">
               <h2 class="post-title">{{ article.title }}</h2>
             </router-link>
             <p class="post-meta">{{ article.tag }} {{ article.created_at | moment }}</p>
           </div>
-          <hr />
         </div>
       </div>
     </div>

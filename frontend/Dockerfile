@@ -1,14 +1,13 @@
 FROM node:lts-alpine
 
 RUN apk update && \
-  apk add git && \
-  apk add --no-cache curl && \
-  curl -o- -L https://yarnpkg.com/install.sh | sh
+    apk add git
 
 WORKDIR /app
 
 COPY package.json ./
 COPY yarn.lock ./
+RUN npm install yarn -g
 RUN yarn install
 COPY . .
 
